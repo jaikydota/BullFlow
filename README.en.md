@@ -6,7 +6,7 @@
 
 <p align="center">
   <b>Massive AI content × omnichannel reach — acquire and convert customers on your own</b><br>
-  A <b>complete, commercial-grade</b> open-source AI growth platform
+  An open-source <b>enterprise RAG solution</b> · from company knowledge base to omnichannel publishing
 </p>
 
 <p align="center">
@@ -18,14 +18,14 @@
   <img src="https://img.shields.io/badge/node-20%2B-339933" alt="Node">
   <img src="https://img.shields.io/badge/FastAPI-async-009688" alt="FastAPI">
   <img src="https://img.shields.io/badge/React-19-61DAFB" alt="React">
+  <img src="https://img.shields.io/badge/enterprise-RAG%20solution-orange" alt="Enterprise RAG solution">
   <img src="https://img.shields.io/badge/enterprise-commercial--grade-purple" alt="Enterprise commercial-grade">
-  <img src="https://img.shields.io/badge/RAG-local%20open--source%20models-orange" alt="RAG with local open-source models">
   <img src="https://img.shields.io/badge/license-MIT%20(commercial%20use%20OK)-green" alt="License MIT, commercial use OK">
 </p>
 
-> 🏢 **This is a complete, commercial-grade enterprise project — not a feature demo or a half-built scaffold.** It ships three full systems: the user app, the operations admin console and the multi-platform publishing gateway. Everything a commercial product needs is implemented: multi-tenant isolation, roles and permissions, billing and subscriptions, online payments, invoices, audit logs, rate limiting and captcha — along with database migrations, Docker deployment and development guidelines. It's **MIT-licensed and free for commercial use**: run it as your own branded SaaS, or deploy it privately inside your company.
+> 🏢 **A complete, commercial-grade open-source project**: user app, operations console and publishing gateway included, with multi-tenancy, permissions, billing, payments and auditing already built — MIT-licensed, free for commercial use.
 
-First turn your company, brand, product, customer and case-study profiles — plus documents, images, audio and video — into a **private knowledge base**. Then let an AI Agent **write articles, illustrated posts, images and videos** grounded in those assets. Finally **publish to 17 domestic and international social platforms in one go**, and feed publishing results and account metrics back for analysis — from raw material to reach, in a single pipeline.
+bullflow is an **enterprise RAG solution**. First turn your company, brand, product, customer and case-study profiles — plus documents, images, audio and video — into a **private knowledge base**. Then let an AI Agent **write articles, illustrated posts, images and videos** grounded in those assets. Finally **publish to 17 domestic and international social platforms in one go**, and feed publishing results and account metrics back for analysis — from raw material to reach, in a single pipeline.
 
 **The entire RAG pipeline depends on no paid model**: document OCR, sentence segmentation, embeddings, reranking, text-to-image search and speech transcription all run on open-source models **deployed locally for free**. However large your knowledge base grows, indexing and retrieval cost nothing per call, and your company data never leaves your network.
 
