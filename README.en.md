@@ -6,7 +6,7 @@
 
 <p align="center">
   <b>Massive AI content × omnichannel reach — acquire and convert customers on your own</b><br>
-  An open-source <b>enterprise RAG solution</b> · from company knowledge base to omnichannel publishing
+  An open-source <b>enterprise RAG solution</b> · from company knowledge base and automated marketing content production to omnichannel publishing
 </p>
 
 <p align="center">
