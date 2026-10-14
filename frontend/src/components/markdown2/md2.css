@@ -1,0 +1,383 @@
+/* ─────────────────────────────────────────────────────────
+   md2.css — MarkDown2 component styles (dark-theme)
+   Scoped under .md2-body to avoid global leaks.
+───────────────────────────────────────────────────────── */
+
+/* ── Base ── */
+.md2-body {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* ── Paragraphs ── */
+.md2-body p {
+  margin: 0 0 0.65em;
+}
+.md2-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Headings ── */
+.md2-body h2,
+.md2-body h3,
+.md2-body h4,
+.md2-body h5,
+.md2-body h6 {
+  color: var(--color-text-primary);
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 1.1em 0 0.45em;
+}
+.md2-body h2 { font-size: 1.12em; }
+.md2-body h3 { font-size: 1.04em; }
+.md2-body h4,
+.md2-body h5,
+.md2-body h6 { font-size: 0.97em; }
+
+/* ── Lists ── */
+.md2-body ul,
+.md2-body ol {
+  margin: 0 0 0.65em;
+  padding-left: 1.5em;
+}
+.md2-body li {
+  margin: 0.2em 0;
+}
+
+/* ── Inline code ── */
+.md2-code-inline {
+  background: rgba(255, 255, 255, 0.09);
+  color: var(--color-neon-cyan);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.3em;
+  padding: 0.1em 0.4em;
+  font-size: 0.85em;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.md2-code-inline:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* ── Code blocks (hljs) ── */
+.md2-body pre.hljs {
+  border-radius: 0.75rem;
+  padding: 0.875rem 1.125rem;
+  margin: 0 0 0.75em;
+  overflow-x: auto;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.82em;
+  line-height: 1.65;
+  position: relative;
+}
+/* "Click to copy" hint */
+.md2-body pre.hljs::after {
+  content: '点击复制';
+  position: absolute;
+  top: 0.45rem;
+  right: 0.8rem;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.25);
+  pointer-events: none;
+  font-family: inherit;
+  transition: color 0.15s;
+}
+.md2-body pre.hljs:hover::after {
+  color: rgba(255, 255, 255, 0.55);
+}
+.md2-body pre.hljs code {
+  background: none;
+  padding: 0;
+  border: none;
+  font-size: inherit;
+  cursor: inherit;
+}
+
+/* ── Links ── */
+.md2-link {
+  color: var(--color-neon-cyan);
+  text-decoration: underline;
+  text-decoration-color: rgba(130, 220, 255, 0.3);
+  text-underline-offset: 2px;
+  transition: opacity 0.15s;
+}
+.md2-link:hover {
+  opacity: 0.75;
+}
+
+/* ── Blockquote ── */
+.md2-body blockquote {
+  border-left: 3px solid rgba(167, 139, 250, 0.45);
+  padding: 0.2em 0 0.2em 1em;
+  margin: 0.5em 0;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ── Table ── */
+.md2-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.75em 0;
+  font-size: 0.9em;
+}
+.md2-body th,
+.md2-body td {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  padding: 0.4em 0.75em;
+  text-align: left;
+}
+.md2-body th {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+.md2-body tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* ── Horizontal rule ── */
+.md2-body hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 1em 0;
+}
+
+/* ── Strong / em ── */
+.md2-body strong {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+.md2-body em {
+  color: var(--color-text-secondary);
+}
+
+/* ── Images ── */
+.md2-body img {
+  max-width: 100%;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+/* ── Error span ── */
+.md2-error {
+  color: var(--color-neon-red, #f87171);
+}
+
+/* ── KaTeX ── */
+.md2-body .katex {
+  display: inline-block;
+  font-size: 1em;
+}
+.md2-body .katex-display {
+  text-align: center;
+  margin: 0.9em 0;
+  overflow-x: auto;
+}
+.md2-body .katex,
+.md2-body .katex * {
+  color: var(--color-text-primary) !important;
+}
+
+/* ── Mermaid ── */
+.md2-mermaid-wrap {
+  margin: 0.75em 0;
+  overflow-x: auto;
+}
+.md2-mermaid {
+  text-align: center;
+  min-height: 32px;
+}
+.md2-mermaid svg {
+  max-width: 100%;
+  border-radius: 0.5rem;
+}
+
+/* ── Think block ── */
+.md2-think {
+  background: rgba(139, 92, 246, 0.06);
+  border: 1px solid rgba(139, 92, 246, 0.22);
+  border-radius: 0.75rem;
+  margin: 0.65em 0;
+  overflow: hidden;
+}
+
+.md2-think-header {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: 100%;
+  padding: 0.55rem 0.875rem;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  text-align: left;
+  transition: background 0.15s;
+}
+.md2-think-header:hover {
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.md2-think-icon {
+  display: flex;
+  color: #a78bfa;
+  flex-shrink: 0;
+}
+
+.md2-think-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #c4b5fd;
+  letter-spacing: 0.01em;
+}
+
+.md2-think-status {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  color: rgba(167, 139, 250, 0.7);
+}
+
+.md2-think-body {
+  height: 56px;
+  overflow: hidden;
+  transition: height 0.28s ease;
+  padding: 0 0.875rem 0.1rem;
+  font-size: 0.85em;
+  color: rgba(255, 255, 255, 0.42);
+  line-height: 1.65;
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+}
+.md2-think-body.md2-think-open {
+  height: auto;
+  -webkit-mask-image: none;
+  mask-image: none;
+  padding-bottom: 0.75rem;
+}
+.md2-think-body p {
+  margin: 0.25em 0;
+}
+
+/* Spinner animation for loading */
+@keyframes md2-spin {
+  to { transform: rotate(360deg); }
+}
+.md2-think-spin {
+  animation: md2-spin 1s linear infinite;
+  display: inline-block;
+}
+
+/* ══════════════════════════════════════════════════════════
+   Light theme overrides (.md2-light)
+   Used for document preview panels with a white background
+══════════════════════════════════════════════════════════ */
+.md2-body.md2-light {
+  color: #374151; /* gray-700 */
+}
+.md2-body.md2-light h2,
+.md2-body.md2-light h3,
+.md2-body.md2-light h4,
+.md2-body.md2-light h5,
+.md2-body.md2-light h6 {
+  color: #111827; /* gray-900 */
+}
+.md2-body.md2-light strong {
+  color: #111827;
+}
+.md2-body.md2-light em {
+  color: #4b5563; /* gray-600 */
+}
+.md2-body.md2-light blockquote {
+  border-left-color: #a5b4fc; /* indigo-300 */
+  color: #6b7280; /* gray-500 */
+}
+.md2-body.md2-light hr {
+  border-top-color: #e5e7eb;
+}
+
+/* Inline code */
+.md2-body.md2-light .md2-code-inline {
+  background: #f3f4f6;
+  color: #0369a1; /* sky-700 */
+  border-color: #e5e7eb;
+}
+.md2-body.md2-light .md2-code-inline:hover {
+  background: #e5e7eb;
+}
+
+/* Code blocks — light neutral instead of dark hljs theme */
+.md2-body.md2-light pre.hljs {
+  background: #f8fafc !important;   /* slate-50 */
+  border-color: #e2e8f0;
+  color: #1e293b;                    /* slate-800 */
+}
+.md2-body.md2-light pre.hljs code {
+  color: #1e293b;
+}
+.md2-body.md2-light pre.hljs::after {
+  color: #94a3b8; /* slate-400 */
+}
+.md2-body.md2-light pre.hljs:hover::after {
+  color: #475569;
+}
+/* Reset hljs token colors for light bg */
+.md2-body.md2-light pre.hljs .hljs-keyword   { color: #7c3aed; }
+.md2-body.md2-light pre.hljs .hljs-string    { color: #059669; }
+.md2-body.md2-light pre.hljs .hljs-comment   { color: #94a3b8; font-style: italic; }
+.md2-body.md2-light pre.hljs .hljs-number    { color: #db2777; }
+.md2-body.md2-light pre.hljs .hljs-built_in,
+.md2-body.md2-light pre.hljs .hljs-literal   { color: #0284c7; }
+.md2-body.md2-light pre.hljs .hljs-title,
+.md2-body.md2-light pre.hljs .hljs-function  { color: #1d4ed8; }
+.md2-body.md2-light pre.hljs .hljs-attr      { color: #b45309; }
+.md2-body.md2-light pre.hljs .hljs-variable  { color: #374151; }
+.md2-body.md2-light pre.hljs .hljs-tag       { color: #dc2626; }
+.md2-body.md2-light pre.hljs .hljs-name      { color: #7c3aed; }
+.md2-body.md2-light pre.hljs .hljs-selector-class,
+.md2-body.md2-light pre.hljs .hljs-selector-id { color: #b45309; }
+
+/* Links */
+.md2-body.md2-light .md2-link {
+  color: #2563eb; /* blue-600 */
+  text-decoration-color: #93c5fd;
+}
+.md2-body.md2-light .md2-link:hover {
+  color: #1d4ed8;
+}
+
+/* Table */
+.md2-body.md2-light th,
+.md2-body.md2-light td {
+  border-color: #e5e7eb;
+}
+.md2-body.md2-light th {
+  background: #f9fafb;
+  color: #111827;
+}
+.md2-body.md2-light tr:nth-child(even) td {
+  background: #f9fafb;
+}
+
+/* KaTeX */
+.md2-body.md2-light .katex,
+.md2-body.md2-light .katex * {
+  color: #111827 !important;
+}
+
+/* Think block */
+.md2-body.md2-light .md2-think {
+  background: rgba(139, 92, 246, 0.04);
+  border-color: rgba(139, 92, 246, 0.18);
+}
+.md2-body.md2-light .md2-think-body {
+  color: #6b7280;
+}
+

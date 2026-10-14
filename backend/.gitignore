@@ -1,0 +1,53 @@
+# Python 字节码
+__pycache__/
+*.py[cod]
+*$py.class
+*.py~
+
+# 构建产物
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# 测试 / 覆盖率
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+.cache
+.pytest_cache/
+
+# 类型检查缓存
+.mypy_cache/
+
+# 日志
+*.log
+logs/
+
+# 环境变量 / 虚拟环境
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# 运行数据（如 QUERY_ADAPTER_PATH 默认的 data/query_adapter.npy）
+data/
+*.npy
+
+# 本地配置 / 凭据
+/config
+cookies.txt
+
+# Docker 构建用的大文件（ffmpeg 二进制、预下载模型等）
+/docker_file/
+
+# 编辑器 / 系统文件
+.idea
+.vscode
+.DS_Store

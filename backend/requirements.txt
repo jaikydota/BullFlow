@@ -1,0 +1,88 @@
+# Web 框架
+fastapi>=0.115
+uvicorn[standard]>=0.32
+python-multipart>=0.0.18
+
+# 异步
+anyio>=4.7
+httpx>=0.28
+aiofiles>=24.1
+
+# 邮件（管理后台发票邮件）
+aiosmtplib>=3.0
+
+# 数据库
+sqlalchemy[asyncio]>=2.0
+asyncmy>=0.2.9
+alembic>=1.14
+
+# Redis
+redis[hiredis]>=5.2
+
+# Pydantic
+pydantic[email]>=2.10
+pydantic-settings>=2.7
+
+# JWT & 安全（密码哈希直接使用 bcrypt，不依赖 passlib）
+python-jose[cryptography]>=3.3
+bcrypt>=4.0,<5.0
+
+# MinIO
+minio>=7.2
+
+# Milvus
+pymilvus>=2.5
+
+# Elasticsearch (must match server major version; server is 8.x)
+elasticsearch[async]>=8.12,<9
+
+# 文档解析
+python-docx>=1.1
+python-pptx>=1.0
+PyMuPDF>=1.25
+pdfplumber>=0.11
+openpyxl>=3.1
+pypandoc>=1.13
+weasyprint>=62.0
+
+# Embedding & ML
+torch>=2.5
+transformers>=4.47
+sentence-transformers>=3.3
+FlagEmbedding>=1.3
+
+# CLIP
+open-clip-torch>=2.29
+
+# LLM
+openai>=1.58
+langchain>=0.3
+langchain-openai>=0.3
+langgraph>=0.2
+
+# 语义分块
+wtpsplit>=2.1
+
+# RAG 评估
+ragas>=0.2
+datasets>=3.0
+
+# Query Adapter (Procrustes + constrained optimization)
+numpy>=1.26
+scipy>=1.14
+
+# 调度
+apscheduler>=3.10
+
+# 工具
+python-dotenv>=1.0
+orjson>=3.10
+uuid-utils>=0.9.0
+pillow>=11.1
+
+# 繁体→简体中文转换（Whisper 中文专用模型输出繁体时使用）
+opencc-python-reimplemented>=0.1.7
+mdit_plain
+
+# Markdown → HTML（自动分发到富文本平台如公众号/知乎时使用）
+markdown>=3.5

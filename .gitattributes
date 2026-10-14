@@ -1,0 +1,14 @@
+# Shell 脚本必须使用 LF；防止在 Windows 上被 core.autocrlf 转成 CRLF，
+# 导致在 WSL/Linux 里执行时 shebang 变成 "#!/usr/bin/env bash\r" 而报错
+# "/usr/bin/env: 'bash\r': No such file or directory"
+*.sh text eol=lf
+
+# Python / 配置 / 锁文件统一 LF，避免跨平台 diff 噪音
+*.py text eol=lf
+*.toml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Windows 批处理脚本保持 CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf

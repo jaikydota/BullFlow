@@ -1,0 +1,95 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: matrix365-backend:latest
+    container_name: matrix365-backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "8021:8021"
+    volumes:
+      - ./backend:/app
+      - /app/docker_file
+    # 启动前先跑数据库迁移；alembic 失败则不启 uvicorn（让 docker logs 暴露错误，
+    # 而不是 silent 启崩 → 反复 restart loop 又没法 exec 进去修复）。
+    # `exec uvicorn` 让 uvicorn 接管 PID 1，docker stop / SIGTERM 时能 graceful shutdown。
+    command:
+      - sh
+      - -c
+      - |
+        alembic upgrade head && exec uvicorn app.main:app --host 0.0.0.0 --port 8021 --workers 1
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      # VITE_* 是 build-time 静态替换，变量定义在 frontend/.env，由 vite build 时自动读取。
+      # 改值后需重新 `docker compose build frontend` 生效。
+    image: matrix365-frontend:latest
+    container_name: matrix365-frontend
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "8020:8020"
+
+  admin-frontend:
+    build:
+      context: ./admin_frontend
+      dockerfile: Dockerfile
+    image: matrix365-admin-frontend:latest
+    container_name: matrix365-admin-frontend
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "8030:8030"
+
+  # ============================================================
+  # 推量发（多租户发布网关）：独立服务，独立域名 tlf-365.chuhaibang.com，与主项目完全解耦
+  # 前后端对外模式与 backend/frontend 一致（前端 nginx 反代后端）
+  # ============================================================
+  tlf-backend:
+    build:
+      context: ./tlf_backend
+      dockerfile: Dockerfile
+    image: matrix365-tlf-backend:latest
+    container_name: matrix365-tlf-backend
+    restart: unless-stopped
+    env_file:
+      - ./tlf_backend/.env
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "8041:8041"
+    volumes:
+      - ./tlf_backend:/app
+    command:
+      - sh
+      - -c
+      - |
+        alembic upgrade head && exec uvicorn tlf_app.main:app --host 0.0.0.0 --port 8041 --workers 1
+
+  tlf-frontend:
+    build:
+      context: ./tlf_frontend
+      dockerfile: Dockerfile
+    image: matrix365-tlf-frontend:latest
+    container_name: matrix365-tlf-frontend
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "8040:8040"

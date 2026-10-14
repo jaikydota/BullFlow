@@ -1,0 +1,52 @@
+# Python 字节码
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 构建产物
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# 测试 / 覆盖率
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+.cache
+.pytest_cache/
+
+# 类型检查缓存
+.mypy_cache/
+# TypeScript 增量构建缓存
+*.tsbuildinfo
+
+# 日志
+*.log
+
+# 环境变量 / 虚拟环境
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# 前端依赖
+node_modules
+
+# docker-compose.milvus.yml 挂载的本地数据目录（etcd / MinIO / Milvus）
+volumes/
+
+# 编辑器 / 系统文件
+.idea
+.vscode
+.cursor
+.DS_Store
+
+# 本地工作区（含 frontend/src/pages/workspace，刻意不入库）
+workspace/

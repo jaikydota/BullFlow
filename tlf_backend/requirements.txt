@@ -1,0 +1,19 @@
+fastapi>=0.115
+uvicorn[standard]>=0.32
+sqlalchemy[asyncio]>=2.0
+asyncmy>=0.2.9
+pymysql>=1.1
+cryptography>=42.0
+alembic>=1.13
+pydantic[email]>=2.10
+pydantic-settings>=2.7
+python-jose[cryptography]>=3.3
+bcrypt>=4.0,<5.0
+python-dotenv>=1.0
+uuid-utils>=0.9.0
+httpx>=0.27
+# socks5 代理出口连通性探测（proxy_health 经 socks5 代理访问目标）
+socksio>=1.0
+redis>=5.0
+# Composio：海外平台 OAuth 授权 + 发帖 action 执行（services/composio_*）
+composio>=0.16,<0.17

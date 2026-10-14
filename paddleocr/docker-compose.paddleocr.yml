@@ -1,0 +1,36 @@
+services:
+  paddleocr:
+    # 本地自建镜像：需自行基于 PaddleX 构建（含 paddlex serving 依赖），
+    # 不需要 OCR 时可在 backend/.env 设 OCR_ENABLED=false 跳过本服务
+    image: paddleocr:v1
+    container_name: paddleocr
+    restart: unless-stopped
+    ports:
+      - "8866:8866"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      # GPU 显存硬上限（MB），防止内存池无限膨胀（0=不限制）
+      # 按实际显存调整，需给同机其他 GPU 进程预留空间
+      - FLAGS_gpu_memory_limit_mb=4096
+    volumes:
+      - paddleocr_cache:/root/.paddleocr
+      - paddleocr_paddlex:/root/.paddlex
+      - ./PP-StructureV3.yaml:/opt/PP-StructureV3.yaml:ro
+    command: >
+      bash -c "paddlex --serve --pipeline /opt/PP-StructureV3.yaml --device gpu --host 0.0.0.0 --port 8866"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8866/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+
+volumes:
+  paddleocr_cache:
+  paddleocr_paddlex:

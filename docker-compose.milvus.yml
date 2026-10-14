@@ -1,0 +1,91 @@
+services:
+  etcd:
+    image: quay.io/coreos/etcd:v3.5.29
+    container_name: milvus-etcd
+    restart: unless-stopped
+    environment:
+      - ETCD_AUTO_COMPACTION_MODE=revision
+      - ETCD_AUTO_COMPACTION_RETENTION=1000
+      - ETCD_QUOTA_BACKEND_BYTES=4294967296
+      - ETCD_SNAPSHOT_COUNT=50000
+      - TZ=Asia/Shanghai
+    command: >
+      etcd
+      --advertise-client-urls=http://etcd:2379
+      --listen-client-urls=http://0.0.0.0:2379
+      --data-dir=/etcd
+    volumes:
+      - ./volumes/etcd:/etcd
+    ports:
+      - "2379:2379"
+    healthcheck:
+      test: ["CMD", "etcdctl", "endpoint", "health", "--endpoints=http://localhost:2379"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  minio:
+    # 2025年10月官方停止发布Docker Hub镜像，改用社区alpine维护版
+    image: alpine/minio:RELEASE.2025-10-15T17-29-55Z
+    container_name: minio
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin123
+      TZ: Asia/Shanghai
+    command: server /data --console-address ":9001"
+    ports:
+      - "9100:9000"   # MinIO API（宿主机 9100 -> 容器 9000）
+      - "9101:9001"   # MinIO 控制台
+    volumes:
+      - ./volumes/minio:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:9000/minio/health/live || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  milvus:
+    image: milvusdb/milvus:v2.5.27
+    container_name: milvus
+    restart: unless-stopped
+    command: ["milvus", "run", "standalone"]
+    environment:
+      ETCD_ENDPOINTS: etcd:2379
+      MINIO_ADDRESS: minio:9000
+      MINIO_ACCESSKEYID: minioadmin
+      MINIO_SECRETACCESSKEY: minioadmin123
+      TZ: Asia/Shanghai
+    ports:
+      - "19530:19530"   # gRPC，SDK连接用
+      - "9091:9091"     # HTTP/metrics
+    volumes:
+      - /usr/share/zoneinfo:/usr/share/zoneinfo:ro
+      - /etc/localtime:/etc/localtime:ro
+      - ./volumes/milvus:/var/lib/milvus
+    depends_on:
+      etcd:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9091/healthz"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  attu:
+    image: zilliz/attu:v2.6.3
+    container_name: milvus-attu
+    restart: unless-stopped
+    environment:
+      MILVUS_URL: milvus:19530
+      TZ: Asia/Shanghai
+    ports:
+      - "6001:3000"   # 浏览器访问 http://localhost:6001
+    depends_on:
+      milvus:
+        condition: service_healthy

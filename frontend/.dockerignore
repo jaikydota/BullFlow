@@ -1,0 +1,10 @@
+node_modules
+dist
+.git
+.gitignore
+*.md
+# .env 需要进入 builder 供 vite build 读取（VITE_* 是 build-time 静态替换）；
+# 仅排除本地开发覆盖文件（vite 约定）
+.env.local
+.env.*.local
+.vscode
