@@ -364,9 +364,11 @@ bin/elasticsearch-plugin install https://get.infini.cloud/elasticsearch/analysis
 
 以下命令均从**仓库根目录**开始，每个服务在单独的终端中运行。
 
-**1. 复制配置文件**，按需填写数据库连接与各云服务 Key：
+**1. 克隆仓库并复制配置文件**，按需填写数据库连接与各云服务 Key：
 
 ```bash
+git clone https://github.com/jaikydota/BullFlow.git
+cd BullFlow
 cp backend/.env.example backend/.env
 cp frontend/.env.example frontend/.env
 cp admin_frontend/.env.example admin_frontend/.env

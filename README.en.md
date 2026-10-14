@@ -368,9 +368,11 @@ bin/elasticsearch-plugin install https://get.infini.cloud/elasticsearch/analysis
 
 All commands start from the **repository root**; run each service in its own terminal.
 
-**1. Copy the config files** and fill in database connections and provider keys:
+**1. Clone the repository and copy the config files**, then fill in database connections and provider keys:
 
 ```bash
+git clone https://github.com/jaikydota/BullFlow.git
+cd BullFlow
 cp backend/.env.example backend/.env
 cp frontend/.env.example frontend/.env
 cp admin_frontend/.env.example admin_frontend/.env
